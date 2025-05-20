@@ -7,10 +7,10 @@ import {
   TableRow,
 } from 'flowbite-react';
 
-import { usePokemonCards } from '../api/queries';
+import { usePokemonCards } from '../api/query';
 
 export const PokemonList = () => {
-  const { data, isLoading, isError } = usePokemonCards();
+  const { data: pokemonList, isLoading, isError } = usePokemonCards();
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Something went wrong 🧨</p>;
@@ -30,7 +30,7 @@ export const PokemonList = () => {
         </TableHead>
 
         <TableBody className="divide-y">
-          {data?.map((card) => (
+          {pokemonList?.data?.map((card) => (
             <TableRow key={card.id}>
               <TableCell>
                 <img
