@@ -9,13 +9,18 @@ export interface PokemonCard {
     small: string;
     large: string;
   };
+  hp: number;
+  types: string[];
+  rarity: string;
 }
 
 interface ApiResponse {
   data: PokemonCard[];
 }
 
-const CARDS_ENDPOINT = '/cards?pageSize=5';
+const PAGE_SIZE = 10;
+
+const CARDS_ENDPOINT = `/cards?pageSize=${PAGE_SIZE}`;
 
 const fetchData = async (url: string) => {
   const { data } = await apiClient.get<ApiResponse>(url);
