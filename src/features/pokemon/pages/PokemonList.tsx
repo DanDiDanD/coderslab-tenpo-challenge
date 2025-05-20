@@ -7,7 +7,7 @@ import {
   TableRow,
 } from 'flowbite-react';
 
-import { usePokemonCards } from '../../../lib/endpoints';
+import { usePokemonCards } from '../api/queries';
 
 export const PokemonList = () => {
   const { data, isLoading, isError } = usePokemonCards();
