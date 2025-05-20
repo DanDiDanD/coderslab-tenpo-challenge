@@ -31,10 +31,7 @@ export const PokemonList = () => {
 
         <TableBody className="divide-y">
           {data?.map((card) => (
-            <TableRow
-              key={card.id}
-              className="bg-white dark:border-gray-700 dark:bg-gray-800"
-            >
+            <TableRow key={card.id}>
               <TableCell>
                 <img
                   src={card.images.small}
