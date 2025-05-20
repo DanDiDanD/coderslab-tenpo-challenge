@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { useLogin } from '../api/query';
+import { useLogin } from '../api/queries';
 
 export const Login = () => {
   const [email, setEmail] = useState('');

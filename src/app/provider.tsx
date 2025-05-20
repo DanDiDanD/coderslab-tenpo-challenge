@@ -4,10 +4,10 @@ import { BrowserRouter } from 'react-router-dom';
 
 const queryClient = new QueryClient();
 
-export function AppProvider({ children }: { children: ReactNode }) {
+export const AppProvider = ({ children }: { children: ReactNode }) => {
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </BrowserRouter>
   );
-}
+};

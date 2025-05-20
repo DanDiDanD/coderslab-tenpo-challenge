@@ -5,10 +5,10 @@ import type { ApiListResponse } from '../../../types';
 
 import { getPokemonCards } from './api';
 
-export function usePokemonCards() {
+export const usePokemonCards = () => {
   return useQuery<ApiListResponse<PokemonCard>, Error>({
     queryKey: ['pokemon-cards'],
     queryFn: getPokemonCards,
     staleTime: 1000 * 60 * 5,
   });
-}
+};
