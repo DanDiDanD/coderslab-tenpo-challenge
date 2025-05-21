@@ -1,6 +1,6 @@
 import type { RouteObject } from 'react-router-dom';
 
-import { PokemonCardList } from '../../features/pokemon/pages/PokemonCardList';
+import { PokemonTCG } from '../../features/pokemon/pages/PokemonTCG';
 
 import { AuthGuard } from './AuthGuard';
 
@@ -8,6 +8,6 @@ export const pokemonRoutes: RouteObject[] = [
   {
     path: '/',
     element: <AuthGuard redirectTo="/login" />,
-    children: [{ index: true, element: <PokemonCardList /> }],
+    children: [{ index: true, element: <PokemonTCG /> }],
   },
 ];
