@@ -1,20 +1,46 @@
-import type { PokemonTCGCard } from '../types';
+import { useLayoutEffect, useState } from 'react';
+import type { InViewHookResponse } from 'react-intersection-observer';
+import type { InfiniteData } from '@tanstack/react-query';
 
-import { PokemonCardListSkeleton } from './PokemonCardListSkeleton';
+import type { PokemonTCGCard } from '../types';
+import type { ApiListResponse } from '../../../types';
+
 import { PokemonCard } from './PokemonCard';
+import { PokemonCardListSkeleton } from './PokemonCardListSkeleton';
 
 type PokemonListProps = {
-  data: PokemonTCGCard[];
-  isLoading?: boolean;
+  pages: InfiniteData<ApiListResponse<PokemonTCGCard>>['pages'];
+  inViewRef: InViewHookResponse['ref'];
+  isFetchingPage: boolean;
 };
 
-export const PokemonCardList = ({ data, isLoading }: PokemonListProps) => {
-  if (isLoading) return <PokemonCardListSkeleton />;
+export const PokemonCardList = ({
+  pages,
+  isFetchingPage,
+  inViewRef,
+}: PokemonListProps) => {
+  const [hasRenderedAllCards, setHasRenderedAllCards] = useState(false);
+
+  useLayoutEffect(() => {
+    setHasRenderedAllCards(!isFetchingPage);
+  }, [isFetchingPage, pages]);
+
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
-      {data.map((card) => (
-        <PokemonCard key={card.id} card={card} />
-      ))}
-    </div>
+    <>
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
+        {pages.map((page) =>
+          page.data.map((card) => (
+            <div key={card.id} className="text-center">
+              <PokemonCard card={card} />
+            </div>
+          )),
+        )}
+
+        {/* Hidden skelleton after rendering all cards */}
+        {!hasRenderedAllCards && <PokemonCardListSkeleton />}
+
+        {!isFetchingPage && <div ref={inViewRef} />}
+      </div>
+    </>
   );
 };

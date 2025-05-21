@@ -1,8 +1,26 @@
+import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
+
 import { usePokemonCards } from '../api/queries';
 import { PokemonCardList } from '../components/PokemonCardList';
 
 export const PokemonTCG = () => {
-  const { data: pokemonList, isLoading, isError } = usePokemonCards();
+  const {
+    data: pokemonList,
+    isError,
+    fetchNextPage,
+    isFetchingNextPage,
+    isLoading,
+  } = usePokemonCards();
+  const { ref, inView } = useInView();
+
+  const isFetchingPage = isLoading || isFetchingNextPage;
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, inView]);
 
   if (isError) return <p>Algo salió mal 🧨</p>;
 
@@ -17,7 +35,11 @@ export const PokemonTCG = () => {
         <h1 className="text-2xl font-bold mb-4 text-center">
           Pokemon Trading Card Game
         </h1>
-        <PokemonCardList isLoading={isLoading} data={pokemonList?.data || []} />
+        <PokemonCardList
+          pages={pokemonList?.pages || []}
+          inViewRef={ref}
+          isFetchingPage={isFetchingPage}
+        />
       </div>
     </>
   );

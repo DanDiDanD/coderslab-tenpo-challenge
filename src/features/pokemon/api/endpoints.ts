@@ -1,3 +1,2 @@
-import { PAGE_SIZE } from '../../../config';
-
-export const POKEMON_CARDS_ENDPOINT = `/cards?pageSize=${PAGE_SIZE}`;
+export const POKEMON_CARDS_ENDPOINT = (pageSize: number, page: number) =>
+  `/cards?pageSize=${pageSize}&page=${page}`;

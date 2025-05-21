@@ -1,14 +1,12 @@
-import { useQuery } from '@tanstack/react-query';
-
-import type { PokemonTCGCard } from '../types';
-import type { ApiListResponse } from '../../../types';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { getPokemonCards } from './api';
 
 export const usePokemonCards = () => {
-  return useQuery<ApiListResponse<PokemonTCGCard>, Error>({
+  return useInfiniteQuery({
     queryKey: ['pokemon-cards'],
-    queryFn: getPokemonCards,
-    staleTime: 1000 * 60 * 5,
+    queryFn: ({ pageParam }) => getPokemonCards(pageParam),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => lastPage.page + 1,
   });
 };

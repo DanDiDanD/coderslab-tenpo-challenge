@@ -27,14 +27,12 @@ export const PokemonCard = ({ card }: Props) => {
   const groupInteractionClassName = `group-hover:scale-105 group-focus:scale-105 group-hover:shadow-xl group-focus:shadow-xl group-hover:shadow-${shadowColor} group-focus:shadow-${shadowColor}`;
 
   return (
-    <div className="text-center">
-      <Image
-        src={card.images.large}
-        alt={card.name}
-        className="w-full h-auto max-h-[80vh] object-contain mx-auto"
-        preview={card.images.small}
-        previewClassName={`w-full h-auto rounded-lg overflow-hidden transition-transform duration-300 ease-out ${groupInteractionClassName}`}
-      />
-    </div>
+    <Image
+      src={card.images.large}
+      alt={card.name}
+      className="w-full h-auto max-h-[80vh] object-contain mx-auto"
+      preview={card.images.small}
+      previewClassName={`w-full h-auto rounded-lg overflow-hidden transition-transform duration-300 ease-out ${groupInteractionClassName}`}
+    />
   );
 };
