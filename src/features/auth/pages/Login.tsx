@@ -24,40 +24,48 @@ export const Login = () => {
     });
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="w-full max-w-sm space-y-6">
-        <h1 className="text-2xl font-semibold text-center">Iniciar sesión</h1>
+    <>
+      <title>Iniciar sesión</title>
+      <meta
+        name="description"
+        content="Página de inicio de sesión para acceder a la aplicación de Pokémon Cards con autenticación segura."
+      />
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <Input
-            label="Correo"
-            id="email"
-            placeholder="example@email.com"
-            {...register('email')}
-            error={formErrors.email}
-          />
+      <div className="min-h-screen flex items-center justify-center px-4">
+        <div className="w-full max-w-sm space-y-6">
+          <h1 className="text-2xl font-semibold text-center">Iniciar sesión</h1>
 
-          <Input
-            label="Contraseña"
-            id="password"
-            type="password"
-            placeholder="••••••••"
-            {...register('password')}
-            error={formErrors.password}
-          />
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <Input
+              label="Correo"
+              id="email"
+              placeholder="example@email.com"
+              {...register('email')}
+              error={formErrors.email}
+            />
 
-          <Button
-            type="submit"
-            className="w-full"
-            isLoading={isPending}
-            loadingText="Iniciando sesión..."
-          >
-            Ingresar
-          </Button>
-        </form>
+            <Input
+              label="Contraseña"
+              id="password"
+              type="password"
+              placeholder="••••••••"
+              {...register('password')}
+              error={formErrors.password}
+            />
 
-        <ErrorMessage isError={isError} error={error} />
+            <Button
+              type="submit"
+              className="w-full"
+              isLoading={isPending}
+              loadingText="Iniciando sesión..."
+            >
+              Ingresar
+            </Button>
+          </form>
+
+          <ErrorMessage isError={isError} error={error} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
