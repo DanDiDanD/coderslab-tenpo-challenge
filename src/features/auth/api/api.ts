@@ -1,9 +1,10 @@
 import { authClient } from '../../../lib/apiClient';
+import type { LoginInput } from '../types';
 
 import { AUTH_LOGIN, AUTH_REFRESH_TOKEN } from './endpoints';
 
-export const login = async (email: string, password: string) => {
-  const { data } = await authClient.post(AUTH_LOGIN, { email, password });
+export const login = async (user: LoginInput) => {
+  const { data } = await authClient.post(AUTH_LOGIN, user);
   localStorage.setItem('accessToken', data.access_token);
   localStorage.setItem('refreshToken', data.refresh_token);
   return data;
