@@ -1,13 +1,12 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
-import { Button, Spinner } from 'flowbite-react';
 
 import { useLogin } from '../api/queries';
 import { ErrorMessage } from '../components';
 import { loginSchema } from '../schemas/loginSchema';
 import type { LoginFormValues } from '../types';
-import { Input } from '../../../components';
+import { Button, Input } from '../../../components';
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -47,14 +46,13 @@ export const Login = () => {
             error={formErrors.password}
           />
 
-          <Button type="submit" className="w-full" disabled={isPending}>
-            {isPending ? (
-              <>
-                <Spinner size="sm" className="mr-2" /> Iniciando sesión...
-              </>
-            ) : (
-              'Ingresar'
-            )}
+          <Button
+            type="submit"
+            className="w-full"
+            isLoading={isPending}
+            loadingText="Iniciando sesión..."
+          >
+            Ingresar
           </Button>
         </form>
 
