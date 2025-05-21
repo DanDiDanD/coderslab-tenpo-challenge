@@ -32,7 +32,7 @@ export const Login = () => {
           <Input
             label="Correo"
             id="email"
-            placeholder="example@mail.com"
+            placeholder="example@email.com"
             {...register('email')}
             error={formErrors.email}
           />

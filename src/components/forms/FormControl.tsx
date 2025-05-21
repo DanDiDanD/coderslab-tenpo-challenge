@@ -27,7 +27,7 @@ export const FormControl = ({
       </Label>
       {children}
       {error && (
-        <HelperText id={describedBy} color="failure" className="mt-2">
+        <HelperText id={describedBy} color="failure" className="mt-0">
           <span>{error}</span>
         </HelperText>
       )}
