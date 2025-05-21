@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
 
 import { useLogin } from '../api/queries';
 import { ErrorMessage } from '../components';
@@ -7,17 +8,19 @@ import { loginSchema } from '../schemas/loginSchema';
 import type { LoginFormValues } from '../types';
 
 export const Login = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<LoginFormValues>({
-    resolver: yupResolver(loginSchema),
-  });
+    formState: { errors: formErrors },
+  } = useForm<LoginFormValues>({ resolver: yupResolver(loginSchema) });
 
-  const { mutate, isPending, isError, error, isSuccess } = useLogin();
+  const { mutate, isPending, isError, error } = useLogin();
 
-  const onSubmit = (data: LoginFormValues) => mutate(data);
+  const onSubmit = (data: LoginFormValues) =>
+    mutate(data, {
+      onSuccess: () => navigate('/', { replace: true }),
+    });
 
   return (
     <div style={styles.container}>
@@ -30,8 +33,8 @@ export const Login = () => {
           type="email"
           placeholder="you@example.com"
         />
-        {errors.email && (
-          <span style={styles.error}>{errors.email.message}</span>
+        {formErrors.email && (
+          <span style={styles.error}>{formErrors.email.message}</span>
         )}
 
         <input
@@ -40,8 +43,8 @@ export const Login = () => {
           type="password"
           placeholder="••••••••"
         />
-        {errors.password && (
-          <span style={styles.error}>{errors.password.message}</span>
+        {formErrors.password && (
+          <span style={styles.error}>{formErrors.password.message}</span>
         )}
 
         <button style={styles.button} disabled={isPending}>
@@ -50,7 +53,6 @@ export const Login = () => {
       </form>
 
       <ErrorMessage isError={isError} error={error} />
-      {isSuccess && <p style={styles.success}>Logged in ✔︎</p>}
     </div>
   );
 };
