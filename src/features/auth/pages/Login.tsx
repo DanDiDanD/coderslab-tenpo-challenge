@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { useLogin } from '../api/queries';
+import { ErrorMessage } from '../components';
 
 export const Login = () => {
   const [email, setEmail] = useState('');
@@ -39,7 +40,7 @@ export const Login = () => {
         </button>
       </form>
 
-      {isError && <p style={styles.error}>{error.message}</p>}
+      <ErrorMessage isError={isError} error={error} />
       {isSuccess && <p style={styles.success}>Logged in ✔︎</p>}
     </div>
   );
