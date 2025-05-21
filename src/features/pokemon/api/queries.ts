@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 
-import type { PokemonCard } from '../types';
+import type { PokemonTCGCard } from '../types';
 import type { ApiListResponse } from '../../../types';
 
 import { getPokemonCards } from './api';
 
 export const usePokemonCards = () => {
-  return useQuery<ApiListResponse<PokemonCard>, Error>({
+  return useQuery<ApiListResponse<PokemonTCGCard>, Error>({
     queryKey: ['pokemon-cards'],
     queryFn: getPokemonCards,
     staleTime: 1000 * 60 * 5,

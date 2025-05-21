@@ -65,7 +65,7 @@ export type PokemonCardType =
   | 'Psychic'
   | 'Water';
 
-export type PokemonCard = {
+export type PokemonTCGCard = {
   id: string;
   name: string;
   images: {

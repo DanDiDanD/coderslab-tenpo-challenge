@@ -6,9 +6,15 @@ import { ImagePreviewButton } from './ImagePreviewButton';
 type ImageProps = {
   preview?: string;
   alt: string;
+  previewClassName?: string;
 } & ImgHTMLAttributes<HTMLImageElement>;
 
-export const Image = ({ src, alt, preview = '', ...props }: ImageProps) => {
+export const Image = ({
+  alt,
+  previewClassName = '',
+  preview = '',
+  ...props
+}: ImageProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   if (!preview) return <img alt={alt} {...props} />;
@@ -17,8 +23,9 @@ export const Image = ({ src, alt, preview = '', ...props }: ImageProps) => {
     <>
       <ImagePreviewButton
         preview={preview}
-        alt={alt}
+        alt={`Vista previa de ${alt}`}
         onClick={() => setIsOpen(true)}
+        className={previewClassName}
       />
 
       <Modal
@@ -35,12 +42,7 @@ export const Image = ({ src, alt, preview = '', ...props }: ImageProps) => {
           </span>
         </ModalHeader>
         <ModalBody>
-          <img
-            alt={alt}
-            src={src}
-            {...props}
-            className="w-full h-auto max-h-[80vh] object-contain mx-auto"
-          />
+          <img alt={alt} {...props} />
         </ModalBody>
       </Modal>
     </>
