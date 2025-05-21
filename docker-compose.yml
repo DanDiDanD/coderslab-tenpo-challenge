@@ -1,0 +1,15 @@
+services:
+  frontend:
+    container_name: coderslab-tenpo-challenge
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VITE_API_AUTH_BASE_URL: ${VITE_API_AUTH_BASE_URL}
+        VITE_API_POKEMON_BASE_URL: ${VITE_API_POKEMON_BASE_URL}
+    ports:
+      - '3000:3000'
+    environment:
+      NODE_ENV: production
+    env_file:
+      - .env.production
