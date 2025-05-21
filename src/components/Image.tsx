@@ -42,7 +42,7 @@ export const Image = ({
           </span>
         </ModalHeader>
         <ModalBody>
-          <img alt={alt} {...props} />
+          <img alt={alt} loading="eager" fetchPriority="high" {...props} />
         </ModalBody>
       </Modal>
     </>
