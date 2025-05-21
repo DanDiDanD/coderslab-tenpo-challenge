@@ -1,42 +1,51 @@
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { useLogin } from '../api/queries';
 import { ErrorMessage } from '../components';
+import { loginSchema } from '../schemas/loginSchema';
+import type { LoginFormValues } from '../types';
 
 export const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormValues>({
+    resolver: yupResolver(loginSchema),
+  });
+
   const { mutate, isPending, isError, error, isSuccess } = useLogin();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    mutate({ email, password });
-  };
+  const onSubmit = (data: LoginFormValues) => mutate(data);
 
   return (
     <div style={styles.container}>
       <h1 style={styles.title}>Login</h1>
 
-      <form onSubmit={handleSubmit} style={styles.form}>
+      <form onSubmit={handleSubmit(onSubmit)} style={styles.form}>
         <input
+          {...register('email')}
           style={styles.input}
           type="email"
           placeholder="you@example.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
         />
+        {errors.email && (
+          <span style={styles.error}>{errors.email.message}</span>
+        )}
+
         <input
+          {...register('password')}
           style={styles.input}
           type="password"
           placeholder="••••••••"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
         />
+        {errors.password && (
+          <span style={styles.error}>{errors.password.message}</span>
+        )}
 
         <button style={styles.button} disabled={isPending}>
-          {isPending ? 'Signing in…' : 'Login'}
+          {isPending ? 'Iniciando sesión…' : 'Ingresar'}
         </button>
       </form>
 
