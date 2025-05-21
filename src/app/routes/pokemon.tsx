@@ -2,12 +2,12 @@ import type { RouteObject } from 'react-router-dom';
 
 import { PokemonList } from '../../features/pokemon/pages/PokemonList';
 
-import { PrivateRoute } from './PrivateRoute';
+import { AuthGuard } from './AuthGuard';
 
 export const pokemonRoutes: RouteObject[] = [
   {
     path: '/',
-    element: <PrivateRoute />,
+    element: <AuthGuard redirectTo="/login" />,
     children: [{ index: true, element: <PokemonList /> }],
   },
 ];

@@ -2,12 +2,12 @@ import type { RouteObject } from 'react-router-dom';
 
 import { Login } from '../../features/auth/pages/Login';
 
-import { PublicWithRedirectRoute } from './PublicWithRedirectRoute';
+import { AuthGuard } from './AuthGuard';
 
 export const authRoutes: RouteObject[] = [
   {
     path: '/login',
-    element: <PublicWithRedirectRoute />,
+    element: <AuthGuard redirectTo="/" inverse />,
     children: [{ index: true, element: <Login /> }],
   },
 ];
