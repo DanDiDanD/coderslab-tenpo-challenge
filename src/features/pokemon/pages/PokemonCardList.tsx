@@ -7,7 +7,6 @@ export const PokemonCardList = () => {
   const { data: pokemonList, isLoading, isError } = usePokemonCards();
   const isMobile = useMobile();
 
-  if (isLoading) return <p>Cargando...</p>;
   if (isError) return <p>Algo salió mal 🧨</p>;
 
   return (
@@ -21,7 +20,10 @@ export const PokemonCardList = () => {
         <h1 className="text-2xl font-bold mb-4 text-center">Cartas Pokemon</h1>
         <PokemonListItem data={pokemonList?.data || []} />
         {isMobile ? (
-          <PokemonListItem data={pokemonList?.data || []} />
+          <PokemonListItem
+            isLoading={isLoading}
+            data={pokemonList?.data || []}
+          />
         ) : (
           <PokemonTable data={pokemonList?.data || []} />
         )}
