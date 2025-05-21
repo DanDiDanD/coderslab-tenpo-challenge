@@ -4,6 +4,7 @@ import type { InfiniteData } from '@tanstack/react-query';
 
 import type { PokemonTCGCard } from '../types';
 import type { ApiListResponse } from '../../../types';
+import { InfiniteScrollTrigger } from '../../../components';
 
 import { PokemonCard } from './PokemonCard';
 import { PokemonCardListSkeleton } from './PokemonCardListSkeleton';
@@ -27,10 +28,14 @@ export const PokemonCardList = ({
 
   return (
     <>
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
+      <div
+        className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4"
+        role="list"
+        aria-busy={isFetchingPage}
+      >
         {pages.map((page) =>
           page.data.map((card) => (
-            <div key={card.id} className="text-center">
+            <div key={card.id} className="text-center" role="listitem">
               <PokemonCard card={card} />
             </div>
           )),
@@ -38,9 +43,11 @@ export const PokemonCardList = ({
 
         {/* Hidden skelleton after rendering all cards */}
         {!hasRenderedAllCards && <PokemonCardListSkeleton />}
-
-        {!isFetchingPage && <div ref={inViewRef} />}
       </div>
+      <InfiniteScrollTrigger
+        isFetching={isFetchingPage}
+        inViewRef={inViewRef}
+      />
     </>
   );
 };

@@ -31,16 +31,23 @@ export const PokemonTCG = () => {
         name="description"
         content="Página donde se muestra la lista oficinal de las cartas de Pokémon desde la primera generación hasta la fecha."
       />
-      <div className="p-6">
-        <h1 className="text-2xl font-bold mb-4 text-center">
-          Pokemon Trading Card Game
-        </h1>
-        <PokemonCardList
-          pages={pokemonList?.pages || []}
-          inViewRef={ref}
-          isFetchingPage={isFetchingPage}
-        />
-      </div>
+      <main>
+        <section aria-labelledby="page-title" className="p-6">
+          <h1 id="page-title" className="text-2xl font-bold mb-4 text-center">
+            Pokemon Trading Card Game
+          </h1>
+        </section>
+        <section aria-labelledby="page-content">
+          <span id="page-content" className="sr-only">
+            Lista de cartas Pokémon
+          </span>
+          <PokemonCardList
+            pages={pokemonList?.pages || []}
+            inViewRef={ref}
+            isFetchingPage={isFetchingPage}
+          />
+        </section>
+      </main>
     </>
   );
 };
