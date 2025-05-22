@@ -1,4 +1,5 @@
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import type { PropsWithChildren } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   Navbar,
   NavbarBrand,
@@ -9,8 +10,9 @@ import {
 import { Image } from '../components';
 import { clearTokens } from '../utils/auth';
 import { NavButton } from '../components/NavButton';
+import { withOutlet } from '../hocs';
 
-export const MainLayout = () => {
+export const MainLayout = ({ children }: PropsWithChildren) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -52,8 +54,10 @@ export const MainLayout = () => {
       </header>
 
       <main id="main-content" className="flex-1 container mx-auto px-4">
-        <Outlet />
+        {children}
       </main>
     </div>
   );
 };
+
+export const MainLayoutOutlet = withOutlet(MainLayout);

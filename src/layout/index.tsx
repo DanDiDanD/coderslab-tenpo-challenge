@@ -1,2 +1,2 @@
-export { MainLayout } from './MainLayout';
-export { AuthLayout } from './AuthLayout';
+export { MainLayout, MainLayoutOutlet } from './MainLayout';
+export { AuthLayout, AuthLayoutOutlet } from './AuthLayout';
