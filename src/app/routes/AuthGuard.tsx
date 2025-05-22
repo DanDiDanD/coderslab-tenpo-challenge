@@ -1,7 +1,7 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
-import { hasAnyToken, isAuthenticated } from '../../utils/auth';
+import { useAuth } from '../../hooks';
 
 interface AuthGuardProps {
   redirectTo: string;
@@ -15,20 +15,7 @@ export const AuthGuard = ({
   children,
 }: AuthGuardProps) => {
   const location = useLocation();
-  const [isLoading, setIsLoading] = useState(true);
-  const [isAuth, setIsAuth] = useState(false);
-
-  useEffect(() => {
-    (async () => {
-      if (inverse) {
-        setIsAuth(hasAnyToken());
-      } else {
-        const result = await isAuthenticated();
-        setIsAuth(result);
-      }
-      setIsLoading(false);
-    })();
-  }, [inverse]);
+  const { isAuth, isLoading } = useAuth(inverse);
 
   if (isLoading) return null;
 
