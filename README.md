@@ -1,12 +1,12 @@
 # CodersLab Tenpo Challenge
 
-Aplicación web desarrollada como parte del desafío técnico de [CodersLab](https://coderslab.io/) para [Tenpo](https://www.tenpo.cl/). Esta aplicación consume dos APIs principales:
+Aplicación web desarrollada como parte del desafío técnico de **[CodersLab](https://coderslab.io/)** para **[Tenpo](https://www.tenpo.cl/)**. Esta aplicación consume dos APIs principales:
 
 - **[Pokémon TCG API](https://docs.pokemontcg.io/)**: utilizada para mostrar cartas coleccionables con scroll infinito, actualmente con más de **18,000** elementos disponibles.
 
 - **[Platzi Fake Store API](https://fakeapi.platzi.com/en/rest/auth-jwt/)**: utilizada como backend de autenticación para simular login y manejo de tokens.
 
-La aplicación implementa funcionalidades modernas como lazy loading, diseño responsivo, accesibilidad basada en WCAG, y pruebas de integración con Vitest.
+La aplicación implementa funcionalidades modernas como lazy loading, diseño responsivo, accesibilidad basada en WCAG, y pruebas de integración..
 
 La página está basada en página oficial de [Pokemon Trading Card Game](https://www.pokemon.com/el/jcc-pokemon/cartas-pokemon?cardName=&cardText=&evolvesFrom=&simpleSubmit=&format=unlimited&hitPointsMin=0&hitPointsMax=340&retreatCostMin=0&retreatCostMax=5&totalAttackCostMin=0&totalAttackCostMax=5&particularArtist=)
 
@@ -18,15 +18,15 @@ La página está basada en página oficial de [Pokemon Trading Card Game](https:
 - **Autenticación**: JWT (con manejo de tokens)
 - **Routing**: React Router DOM 6
 - **Testing**: Vitest, React Testing Library, MSW
-- **Project Standard**: ESLint, Prettier, TypeScript, Husky
+- **Project Standard**: ESLint, Prettier, TypeScript, Husky, Docker
 
-## 🧪 Features
+## 📦 Features
 
 - Autenticación con JWT y manejo de tokens
 - Visualización de cartas de Pokémon TCG con scroll infinito
 - Diseño completamente responsivo para dispositivos móviles y de escritorio
 - Accesibilidad mejorada cumpliendo con pautas WCAG 2.1
-- Pruebas de integración con Vitest
+- Pruebas de integración con Vitest y React Testing Library.
 - Optimización de rendimiento con lazy loading y memorización
 
 ## ⚙️ Pre-requisites
@@ -60,6 +60,26 @@ npm run dev
 
 2. Ir a [localhost:5173](http://localhost:5173/)
 3. Presionar Control + C para detener la app
+
+## 🧪 Testing
+
+El proyecto cuenta con pruebas de integración y unidad escritas con **Vitest** y **Testing Library**, cubriendo el comportamientos de usuario en el flujo de autenticación y visualización de cartas.
+
+### Ejecutar tests manualmente
+
+```bash
+npx vitest run
+```
+
+Esto ejecutará todas las pruebas en modo consola.
+
+También puedes correr los tests en modo watch para desarrollo:
+
+```bash
+npx vitest
+```
+
+💡 Las pruebas incluyen mocking de API usando MSW (Mock Service Worker) para simular las respuestas del backend sin necesidad de conexión a servicios reales.
 
 ## 🔐 Autenticación
 
@@ -106,19 +126,20 @@ src
 - Se decidió seleccionar la API pública de **[Pokémon TCG](https://docs.pokemontcg.io/)** por su gran volumen de datos (más de 18,000 elementos disponibles), lo cuál permite simular escenarios reales de rendimientos y manejo de grandes listas, además de superar los **2000 elementos** solicitados en el detalle de la prueba técnica.
 - Se decidió seleccionar la API pública de **[Platzi Fake Store](https://fakeapi.platzi.com/en/rest/auth-jwt/)** para desarrollar y probar un sistema de autenticación realista ya que su integración, en conjunto con la API de Pokémon TCG, permite simular una arquitectura basada en múltiples servicios backend, replicando el consumo de microservicios de forma escalable, sin requerir cambios estructurales significativos en el frontend.
 - Se decidió estructurar el proyecto siguiendo la guía de [bulletproof-react](https://github.com/alan2207/bulletproof-react/blob/master/docs/project-structure.md) con el objetivo de facilitar la escalabilidad, mantener una separación clara de responsabilidades y mejorar la mantenibilidad del código a largo plazo.
-- Se decidió utilizar scroll infinito para listar los elementos, priorizando fluidez, rendimiento y una mejor experiencia de usuario en grandes volúmenes de datos. Más detalle en la sección [Argumento sobre criterio para mostrar la lista en el home](#argumento-sobre-criterio-para-mostrar-la-lista-en-el-home)
-- Se decidió incluir las URLs de las APIs en un archivo .env dentro del repositorio, dado que se trata de un reto técnico. Esto facilita la revisión inmediata del proyecto sin requerir configuración adicional por parte del equipo evaluador.
-- Se decidió basar el diseño visual en la página de login de la web de [Pokémon](https://www.pokemon.com/us/pokemon-trainer-club/login) y en la visualización de cartas de la [Biblioteca de cartas de Hearthstone](https://hearthstone.blizzard.com/es-es/cards/).
+- Se decidió utilizar scroll infinito para listar los elementos, priorizando fluidez, rendimiento y una mejor experiencia de usuario en grandes volúmenes de datos. Más detalle en la sección [Argumento sobre criterio para mostrar la lista en el home](#argumento-sobre-criterio-para-mostrar-la-lista-en-el-home).
+- Se decidió incluir las URLs de las APIs en un archivo **.env** dentro del repositorio, dado que se trata de un reto técnico. Esto facilita la revisión inmediata del proyecto sin requerir configuración adicional por parte del equipo evaluador.
+- Se decidió basar el diseño visual en la página de login de la web de [Pokémon](https://www.pokemon.com/us/pokemon-trainer-club/login) y en la visualización de cartas de la [Biblioteca de cartas de Hearthstone](https://hearthstone.blizzard.com/es-es/cards/) la cuál tambien muestra sus elementos con scroll infinito.
 
 ## 📈 Mejoras a implementar
 
 - Incorporar opciones de ordenamiento y filtrado en el listado de cartas (por nombre, tipo de energía, rareza, expansión, etc.).
 - Agregar un switch que permita alternar la visualización de las cartas entre modo grid y tabla.
 - Agregar detalle al presionar carta (actualmente solo se abre un modal y se muestra la imagen en grande)
-- Implementar un prefetching con **React Query** para precargar las siguientes páginas antes que el usuario llegue al final del scroll (mejorando la percepción de velocidad)
+- Implementar un prefetching con **React Query** para precargar las siguientes páginas antes que el usuario llegue al final del scroll (mejorando la percepción de velocidad).
 - Implementar **@tanstack/react-virtual** para renderizar únicamente los elementos visibles en el viewport y reducir significativamente el número de nodos en el DOM y el rendimiento de la aplicación.
 - Implementar **react-i18next** para que la aplicación tenga soporte a varios idiomas.
 - Implementar sistema de colores para Tailwind/Flowbite que sea compatible con Light y Dark Mode.
+- Configurar el entorno de desarrollo para que también utilice Docker, facilitando la ejecución y estandarización del proyecto en diferentes máquinas.
 
 ## 📋 Argumento sobre criterio para mostrar la lista en el home
 
@@ -129,6 +150,12 @@ Se optó por utilizar un scroll infinito para mostrar los elementos provenientes
 - Se adapta de forma natural a dispositivos móviles, donde el desplazamiento vertical es más intuitivo que la interacción con botones de paginación.
 
 ## 📡 Propuesta de mejora técnica sobre llamadas al backend
+
+Respondiendo al enunciado de la prueba técnica:
+
+> Proponer una mejora teórica sobre las llamadas usadas al backend para que nuestra app sea más eficiente.
+
+A continuación, se presentan dos propuestas concretas para mejorar el rendimiento y la eficiencia de las llamadas al backend:
 
 ### 1. Aligerar la carga de datos
 
@@ -150,11 +177,11 @@ Actualmente, La API de Pokémon TCG implementa Offset-based pagination (page, pa
 - Obtener la cantidad de páginas que contiene la API.
 - Se busca una implementación rápida y sencilla desde el backend.
 
-Sin embargo, para los casos donde manejamos grandes volumenes de datos (como en nuestro caso, que manejamos más de **18,000** elementos obtenibles) utilizar una arquitectura Offset-based podría generar problemas de rendimiento y de experiencia de usuario. Las consultas se vuelven progresivamente más costosas a medida que aumentan las páginas solicitadas, y en muchos casos el page size no es ajustable dinámicamente.
+Sin embargo, para los casos donde manejamos grandes volumenes de datos (como en nuestro caso, que manejamos más de **18,000** elementos obtenibles) utilizar una estrategia de paginación Offset-based podría generar problemas de rendimiento y de experiencia de usuario. Las consultas se vuelven progresivamente más costosas a medida que aumentan las páginas solicitadas, y en muchos casos el page size no es ajustable dinámicamente.
 
 En este contexto (suponiendo que tuviéramos control sobre el backend), sería más apropiado adoptar una estrategia de **Cursor-based pagination**.
 
-Este enfoque permite realizar peticiones sobre grandes conjuntos de datos de manera fluida, sin comprometer el tiempo de respuesta del servidor ni la experiencia de usuario (tal como lo hacen Facebook, Instagram y Twitter con sus feeds). De implementar esta arquitectura podríamos:
+Este enfoque permite realizar peticiones sobre grandes conjuntos de datos de manera fluida, sin comprometer el tiempo de respuesta del servidor ni la experiencia de usuario (tal como lo hacen Facebook, Instagram y Twitter con sus feeds). De implementar esta estrategia podríamos:
 
 - Cargar los elementos de grandes volumenes de datos de manera consistente y eficiente sin afectar el rendimiento .
 - Ajustar dinámicamente la cantidad del page size (expecialmente util para vistas mobiles ya que no se necesita hacer request a la misma cantidad de elementos)
@@ -185,3 +212,12 @@ Este parámetro ejecuta múltiples requests en segundo plano hasta completar la 
 💡 Esta lógica se encuentra aislada y puede eliminarse sin afectar el comportamiento general de la app. Está pensada solo para facilitar la revisión del requerimiento.
 
 🚫 NO DEBERÍA mantenerse en producción y debe ser eliminada tras su revisión.
+
+## 👨‍💻 Autor
+
+Desarrollado por **Daniel Angeles** como parte del desafío técnico de **[CodersLab](https://coderslab.io/)** para **[Tenpo](https://www.tenpo.cl/)**.
+
+- 📫 Email: daniel.angeles9806@gmail.com
+- 💼 LinkedIn: [linkedin.com/in/danielangeles98](https://www.linkedin.com/in/danielangeles98/)
+- 🎯 GetOnBoard: [Daniel Jesús Angeles Rojas](https://www.getonbrd.com/p/daniel-jesus-angeles-rojas)
+- 🐙 Github: [DanDiDanD](https://github.com/DanDiDanD)
