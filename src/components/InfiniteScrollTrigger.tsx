@@ -14,6 +14,6 @@ export const InfiniteScrollTrigger = ({
       {isFetching ? 'Cargando más resultados...' : ''}
     </div>
 
-    {!isFetching && <div ref={inViewRef} />}
+    {!isFetching && <div ref={inViewRef}></div>}
   </>
 );

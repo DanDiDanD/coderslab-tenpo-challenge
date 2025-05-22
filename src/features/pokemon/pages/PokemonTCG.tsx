@@ -37,7 +37,7 @@ export const PokemonTCG = () => {
           Pokemon Trading Card Game
         </h1>
       </section>
-      <section aria-labelledby="page-content">
+      <section aria-labelledby="page-content" className="pb-6">
         <span id="page-content" className="sr-only">
           Lista de cartas Pokémon
         </span>
