@@ -139,6 +139,8 @@ src
 - Implementar **@tanstack/react-virtual** para renderizar únicamente los elementos visibles en el viewport y reducir significativamente el número de nodos en el DOM y el rendimiento de la aplicación.
 - Implementar **react-i18next** para que la aplicación tenga soporte a varios idiomas.
 - Implementar sistema de colores para Tailwind/Flowbite que sea compatible con Light y Dark Mode.
+- Implementar pipeline **CI/CD** con Jenkins para automatizar testeo y despliegue.
+- Configurar **imports absolutos** para simplificar las rutas de importación y mejorar la organización del código.
 - Configurar el entorno de desarrollo para que también utilice Docker, facilitando la ejecución y estandarización del proyecto en diferentes máquinas.
 
 ## 📋 Argumento sobre criterio para mostrar la lista en el home
