@@ -6,7 +6,7 @@ import { useLogin } from '../api/queries';
 import { ErrorMessage } from '../components';
 import { loginSchema } from '../schemas/loginSchema';
 import type { LoginFormValues } from '../types';
-import { Button, Input } from '../../../components';
+import { Button, Image, Input } from '../../../components';
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -31,41 +31,45 @@ export const Login = () => {
         content="Página de inicio de sesión para acceder a la aplicación de Pokémon Cards con autenticación segura."
       />
 
-      <div className="min-h-screen flex items-center justify-center px-4">
-        <div className="w-full max-w-sm space-y-6">
-          <h1 className="text-2xl font-semibold text-center">Iniciar sesión</h1>
-
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            <Input
-              label="Correo"
-              id="email"
-              placeholder="example@email.com"
-              {...register('email')}
-              error={formErrors.email}
-            />
-
-            <Input
-              label="Contraseña"
-              id="password"
-              type="password"
-              placeholder="••••••••"
-              {...register('password')}
-              error={formErrors.password}
-            />
-
-            <Button
-              type="submit"
-              className="w-full"
-              isLoading={isPending}
-              loadingText="Iniciando sesión..."
-            >
-              Ingresar
-            </Button>
-          </form>
-
-          <ErrorMessage isError={isError} error={error} />
-        </div>
+      <div className="flex justify-center mb-5">
+        <Image
+          src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Pok%C3%A9mon_Trading_Card_Game_logo.svg"
+          alt="El Juego de Cartas Coleccionables Pokémon"
+          className="h-25 text-center"
+        />
       </div>
+
+      <h1 className="text-2xl font-semibold text-center mb-3">
+        Inicia sesión en tu cuenta del Club de Entrenadores Pokémon
+      </h1>
+
+      <ErrorMessage isError={isError} error={error} />
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <Input
+          id="email"
+          placeholder="example@email.com"
+          {...register('email')}
+          error={formErrors.email}
+        />
+
+        <Input
+          id="password"
+          type="password"
+          placeholder="••••••••"
+          {...register('password')}
+          error={formErrors.password}
+        />
+
+        <Button
+          type="submit"
+          className="w-full hover:bg-primary/90 text-white rounded py-2 font-semibold"
+          isLoading={isPending}
+          loadingText="Iniciando sesión..."
+        >
+          Iniciar sesión
+        </Button>
+      </form>
     </>
   );
 };

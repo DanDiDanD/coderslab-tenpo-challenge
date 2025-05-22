@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 
 type FormControlProps = {
   id: string;
-  label: string;
+  label?: string;
   error?: string;
   children: ReactNode;
   className?: string;
@@ -22,9 +22,11 @@ export const FormControl = ({
 
   return (
     <div className={`flex flex-col space-y-2 ${className}`}>
-      <Label htmlFor={id} color={hasError ? 'failure' : undefined}>
-        {label}
-      </Label>
+      {label && (
+        <Label htmlFor={id} color={hasError ? 'failure' : undefined}>
+          {label}
+        </Label>
+      )}
       {children}
       {error && (
         <HelperText id={describedBy} color="failure" className="mt-0">

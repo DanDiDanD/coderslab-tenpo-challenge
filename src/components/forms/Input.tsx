@@ -5,7 +5,7 @@ import type { FieldError } from 'react-hook-form';
 import { FormControl } from './FormControl';
 
 type InputProps = TextInputProps & {
-  label: string;
+  label?: string;
   error?: FieldError;
 };
 
