@@ -17,7 +17,7 @@ export const ImagePreviewButton = ({
       type="button"
       aria-label={`Ver imagen completa de ${alt}`}
       onClick={onClick}
-      className={`relative group cursor-pointer focus-visible:outline-none bg-transparent`}
+      className={`block relative group cursor-pointer focus-visible:outline-none bg-transparent`}
     >
       <img src={preview} alt={alt} {...props} />
     </button>

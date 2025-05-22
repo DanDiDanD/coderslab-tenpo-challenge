@@ -8,6 +8,7 @@ import { InfiniteScrollTrigger } from '../../../components';
 
 import { PokemonCard } from './PokemonCard';
 import { PokemonCardListSkeleton } from './PokemonCardListSkeleton';
+import { PokemonCardWrapper } from './PokemonCardWrapper';
 
 type PokemonListProps = {
   pages: InfiniteData<ApiListResponse<PokemonTCGCard>>['pages'];
@@ -29,15 +30,15 @@ export const PokemonCardList = ({
   return (
     <>
       <div
-        className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4"
+        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8 items-stretch"
         role="list"
         aria-busy={isFetchingPage}
       >
         {pages.map((page) =>
           page.data.map((card) => (
-            <div key={card.id} className="text-center" role="listitem">
+            <PokemonCardWrapper key={card.id} role="listitem">
               <PokemonCard card={card} />
-            </div>
+            </PokemonCardWrapper>
           )),
         )}
 
