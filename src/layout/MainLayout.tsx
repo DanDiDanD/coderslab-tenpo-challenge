@@ -19,7 +19,7 @@ export const MainLayout = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 overflow-hidden">
+    <div className="min-h-screen flex flex-col overflow-hidden">
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-white text-black p-2 z-50"
