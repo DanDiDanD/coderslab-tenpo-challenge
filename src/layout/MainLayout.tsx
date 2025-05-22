@@ -61,10 +61,7 @@ export const MainLayout = () => {
         </Navbar>
       </header>
 
-      <main
-        id="main-content"
-        className="flex-1 overflow-y-auto container mx-auto px-4"
-      >
+      <main id="main-content" className="flex-1 container mx-auto px-4">
         <Outlet />
       </main>
     </div>
