@@ -17,3 +17,5 @@ export const InfiniteScrollTrigger = ({
     {!isFetching && <div ref={inViewRef}></div>}
   </>
 );
+
+export default InfiniteScrollTrigger;

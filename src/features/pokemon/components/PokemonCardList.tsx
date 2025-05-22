@@ -1,10 +1,13 @@
-import { useLayoutEffect, useState } from 'react';
+import { lazy, Suspense, useLayoutEffect, useState } from 'react';
 import type { InViewHookResponse } from 'react-intersection-observer';
 import type { InfiniteData } from '@tanstack/react-query';
 
 import type { PokemonTCGCard } from '../types';
 import type { ApiListResponse } from '../../../types';
-import { InfiniteScrollTrigger } from '../../../components';
+
+const InfiniteScrollTrigger = lazy(
+  () => import('../../../components/InfiniteScrollTrigger'),
+);
 
 import { PokemonCard } from './PokemonCard';
 import { PokemonCardListSkeleton } from './PokemonCardListSkeleton';
@@ -45,10 +48,12 @@ export const PokemonCardList = ({
         {/* Hidden skelleton after rendering all cards */}
         {!hasRenderedAllCards && <PokemonCardListSkeleton />}
       </div>
-      <InfiniteScrollTrigger
-        isFetching={isFetchingPage}
-        inViewRef={inViewRef}
-      />
+      <Suspense fallback={null}>
+        <InfiniteScrollTrigger
+          isFetching={isFetchingPage}
+          inViewRef={inViewRef}
+        />
+      </Suspense>
     </>
   );
 };
