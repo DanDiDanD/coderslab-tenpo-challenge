@@ -1,14 +1,19 @@
-import { useEffect, useState } from 'react';
-import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { useEffect, useState, type ReactNode } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
 
 import { hasAnyToken, isAuthenticated } from '../../utils/auth';
 
 interface AuthGuardProps {
   redirectTo: string;
   inverse?: boolean;
+  children: ReactNode;
 }
 
-export const AuthGuard = ({ redirectTo, inverse = false }: AuthGuardProps) => {
+export const AuthGuard = ({
+  redirectTo,
+  inverse = false,
+  children,
+}: AuthGuardProps) => {
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
   const [isAuth, setIsAuth] = useState(false);
@@ -30,7 +35,7 @@ export const AuthGuard = ({ redirectTo, inverse = false }: AuthGuardProps) => {
   const shouldRender = inverse ? !isAuth : isAuth;
 
   return shouldRender ? (
-    <Outlet />
+    children
   ) : (
     <Navigate to={redirectTo} replace state={{ from: location }} />
   );
