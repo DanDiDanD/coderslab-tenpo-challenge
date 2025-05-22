@@ -46,7 +46,7 @@ chmod 777 ./quickstart.sh
 ./quickstart.sh
 ```
 
-2. Ir a [localhost:3000](http://localhost:3000)
+2. Ir a [localhost:3000](http://localhost:3000/)
 3. Presionar Control + C para detener la app
 
 ### Levantar App para desarrollo
@@ -159,3 +159,28 @@ Este enfoque permite realizar peticiones sobre grandes conjuntos de datos de man
 - Ajustar dinámicamente la cantidad del page size (expecialmente util para vistas mobiles ya que no se necesita hacer request a la misma cantidad de elementos)
 
 A pesar de ser una técnica algo más compleja de implementar en comparación con offset-based pagination, representa una opción significativamente más escalable y robusta para interfaces basadas en scroll infinito, optimizando tanto la carga en el servidor como la fluidez en el cliente.
+
+## ⚠️ Parámetro especial de testing: `?fetchUntil=number`
+
+⚠️ **IMPORTANTE:** Este parámetro fue creado **exclusivamente** con fines de evaluación técnica y **no debería usarse en producción**.
+
+Se agrega este parámetro debido a la **literalidad del requerimiento** presente en el enunciado de la prueba técnica:
+
+> "Levantar una home, la cual se conecte con una API pública (a elección) y muestre una lista de 2000 elementos."
+
+Para facilitar un caso de testing al equipo revisor, se ha habilitado el parámetro `fetchUntil` en la URL, que permite simular la carga inicial de un número específico de elementos.
+
+✅ **Usos de ejemplo:**
+
+```bash
+http://localhost:3000/?fetchUntil=2000
+BASE_URL/?fetchUntil=2000
+```
+
+Este parámetro ejecuta múltiples requests en segundo plano hasta completar la cantidad deseada de cartas (en este caso, 2000).
+
+❌ NO es posible cargar 2000 elementos de golpe ya que la API limita `pageSize` a 250.
+
+💡 Esta lógica se encuentra aislada y puede eliminarse sin afectar el comportamiento general de la app. Está pensada solo para facilitar la revisión del requerimiento.
+
+🚫 NO DEBERÍA mantenerse en producción y debe ser eliminada tras su revisión.
