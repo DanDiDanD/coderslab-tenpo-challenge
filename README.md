@@ -101,13 +101,16 @@ src
 - Se favorece el aislamiento de responsabilidades: `lib/` para infraestructura, `hooks/` para lógica compartida, `layout/` para estructura visual global.
 - Se prioriza el rendimiento, accesibilidad y calidad del código como pilares fundamentales del diseño.
 
-AWS Lambda para filtrar solo los datos que necesitamos
-Aligerar la carga del payload
-GraphQL para obtener solo lo que queremos
-
 ## 📌 Decisiones tomadas
 
-## 📈 Mejoras
+- Se decidió seleccionar la API pública de **[Pokémon TCG](https://docs.pokemontcg.io/)** por su gran volumen de datos (más de 18,000 elementos disponibles), lo cuál permite simular escenarios reales de rendimientos y manejo de grandes listas, además de superar los **2000 elementos** solicitados en el detalle de la prueba técnica.
+- Se decidió seleccionar la API pública de **[Platzi Fake Store](https://fakeapi.platzi.com/en/rest/auth-jwt/)** para desarrollar y probar un sistema de autenticación realista ya que su integración, en conjunto con la API de Pokémon TCG, permite simular una arquitectura basada en múltiples servicios backend, replicando el consumo de microservicios de forma escalable, sin requerir cambios estructurales significativos en el frontend.
+- Se decidió estructurar el proyecto siguiendo la guía de [bulletproof-react](https://github.com/alan2207/bulletproof-react/blob/master/docs/project-structure.md) con el objetivo de facilitar la escalabilidad, mantener una separación clara de responsabilidades y mejorar la mantenibilidad del código a largo plazo.
+- Se decidió utilizar scroll infinito para listar los elementos, priorizando fluidez, rendimiento y una mejor experiencia de usuario en grandes volúmenes de datos. Más detalle en la sección [Argumento sobre criterio para mostrar la lista en el home](#argumento-sobre-criterio-para-mostrar-la-lista-en-el-home)
+- Se decidió incluir las URLs de las APIs en un archivo .env dentro del repositorio, dado que se trata de un reto técnico. Esto facilita la revisión inmediata del proyecto sin requerir configuración adicional por parte del equipo evaluador.
+- Se decidió basar el diseño visual en la página de login de la web de [Pokémon](https://www.pokemon.com/us/pokemon-trainer-club/login) y en la visualización de cartas de la [Biblioteca de cartas de Hearthstone](https://hearthstone.blizzard.com/es-es/cards/).
+
+## 📈 Mejoras a implementar
 
 - Incorporar opciones de ordenamiento y filtrado en el listado de cartas (por nombre, tipo de energía, rareza, expansión, etc.).
 - Agregar un switch que permita alternar la visualización de las cartas entre modo grid y tabla.
@@ -116,8 +119,6 @@ GraphQL para obtener solo lo que queremos
 - Implementar **@tanstack/react-virtual** para renderizar únicamente los elementos visibles en el viewport y reducir significativamente el número de nodos en el DOM y el rendimiento de la aplicación.
 - Implementar **react-i18next** para que la aplicación tenga soporte a varios idiomas.
 - Implementar sistema de colores para Tailwind/Flowbite que sea compatible con Light y Dark Mode.
-
-reduciendo significativamente el número de nodos en el DOM y mejorando la fluidez,
 
 ## 📋 Argumento sobre criterio para mostrar la lista en el home
 
@@ -131,7 +132,7 @@ Se optó por utilizar un scroll infinito para mostrar los elementos provenientes
 
 ### 1. Aligerar la carga de datos
 
-Actualmente, la API de Pokémon TCG entrega un volumen considerable de datos por cada solicitud (ver ejemplo con 25 cartas). Esto implica una mayor carga de red y un tiempo de renderizado más lento para el usuario final, especialmente en conexiones móviles o con múltiples llamadas paginadas.
+Actualmente, la API de Pokémon TCG entrega un volumen considerable de datos por cada solicitud ([ver ejemplo con 25 cartas](https://api.pokemontcg.io/v2/cards?pageSize=25)). Esto implica una mayor carga de red y un tiempo de renderizado más lento para el usuario final, especialmente en conexiones móviles o con múltiples llamadas paginadas.
 
 Este problema puede abordarse desde tres enfoques distintos:
 
@@ -160,9 +161,9 @@ Este enfoque permite realizar peticiones sobre grandes conjuntos de datos de man
 
 A pesar de ser una técnica algo más compleja de implementar en comparación con offset-based pagination, representa una opción significativamente más escalable y robusta para interfaces basadas en scroll infinito, optimizando tanto la carga en el servidor como la fluidez en el cliente.
 
-## ⚠️ Parámetro especial de testing: `?fetchUntil=number`
+## ⚠️ **IMPORTANTE:** Parámetro especial de testing: `?fetchUntil=number`
 
-⚠️ **IMPORTANTE:** Este parámetro fue creado **exclusivamente** con fines de evaluación técnica y **no debería usarse en producción**.
+Este parámetro fue creado **exclusivamente** con fines de evaluación técnica y **no debería usarse en producción**.
 
 Se agrega este parámetro debido a la **literalidad del requerimiento** presente en el enunciado de la prueba técnica:
 
