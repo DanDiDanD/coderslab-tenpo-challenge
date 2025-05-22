@@ -8,8 +8,8 @@ import { renderWithProviders } from '../../../test/utils';
 
 const PLACEHOLDER_EMAIL = /example@email.com/i;
 const PLACEHOLDER_PASSWORD = /••••••••/i;
-const BUTTON_SUBMIT = /Ingresar/i;
-const ERROR_MESSAGE = /Correo y\/o contraseña inválidos./i;
+const BUTTON_SUBMIT = /Iniciar sesión/i;
+const ERROR_MESSAGE = /El nombre de usuario y la contraseña son incorrectos./i;
 
 describe('Login', () => {
   it('shows error message on invalid credentials', async () => {

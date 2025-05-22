@@ -23,5 +23,9 @@ export const ErrorMessage = ({ isError, error }: ErrorMessageProps) => {
     else message = error.message;
   }
 
-  return <p className="text-red-700 text-center mt-1 mb-3">{message}</p>;
+  return (
+    <p role="alert" className="text-red-700 text-center mt-1 mb-3">
+      {message}
+    </p>
+  );
 };
