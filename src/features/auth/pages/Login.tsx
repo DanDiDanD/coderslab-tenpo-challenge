@@ -33,7 +33,7 @@ export const Login = () => {
 
       <div className="flex justify-center mb-5">
         <Image
-          src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Pok%C3%A9mon_Trading_Card_Game_logo.svg"
+          src="/assets/pokemon-logo.svg"
           alt="El Juego de Cartas Coleccionables Pokémon"
           className="h-25 text-center"
         />

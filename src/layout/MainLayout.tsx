@@ -32,7 +32,7 @@ export const MainLayout = () => {
           <Navbar fluid className="shadow-sm bg-transparent text-white w-full">
             <NavbarBrand as={Link} href="/">
               <Image
-                src="https://tcg.pokemon.com/assets/img/global/logos/es-mx/tcg-logo.png"
+                src="/assets/pokemon-logo.svg"
                 alt="El Juego de Cartas Coleccionables Pokémon"
                 className="h-10"
               />
