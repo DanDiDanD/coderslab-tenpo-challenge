@@ -1,14 +1,24 @@
 import { Link } from 'react-router-dom';
 
+import { useAuth } from '../../hooks';
+import { AuthLayout, MainLayout } from '../../layout';
+
 export const NotFound = () => {
+  const { isAuth, isLoading } = useAuth();
+
+  if (isLoading) return null;
+
+  const Layout = isAuth ? MainLayout : AuthLayout;
+
   return (
-    <>
+    <Layout>
       <title>Página no encontrada.</title>
       <meta
         name="description"
         content="La página que estás buscando no existe o fue movida. Vuelve al inicio para seguir navegando en la aplicación de cartas Pokémon."
       />
-      <main
+
+      <section
         className="flex flex-col items-center justify-center px-4 text-center min-h-[80vh] max-w-xl mx-auto"
         aria-label="Página de error 404: no encontrada"
       >
@@ -34,7 +44,7 @@ export const NotFound = () => {
         >
           Volver al inicio
         </Link>
-      </main>
-    </>
+      </section>
+    </Layout>
   );
 };
