@@ -1,4 +1,4 @@
-import { lazy, Suspense, useLayoutEffect, useState } from 'react';
+import { lazy, memo, Suspense, useLayoutEffect, useState } from 'react';
 import type { InViewHookResponse } from 'react-intersection-observer';
 import type { InfiniteData } from '@tanstack/react-query';
 
@@ -18,6 +18,9 @@ type PokemonListProps = {
   inViewRef: InViewHookResponse['ref'];
   isFetchingPage: boolean;
 };
+
+const MemoPokemonCardWrapper = memo(PokemonCardWrapper);
+const MemoPokemonCard = memo(PokemonCard);
 
 export const PokemonCardList = ({
   pages,
@@ -39,9 +42,9 @@ export const PokemonCardList = ({
       >
         {pages.map((page) =>
           page.data.map((card) => (
-            <PokemonCardWrapper key={card.id} role="listitem">
-              <PokemonCard card={card} />
-            </PokemonCardWrapper>
+            <MemoPokemonCardWrapper key={card.id} role="listitem">
+              <MemoPokemonCard card={card} />
+            </MemoPokemonCardWrapper>
           )),
         )}
 
