@@ -31,35 +31,40 @@ export const MainLayout = () => {
 
       <header>
         <Navbar fluid className="shadow-sm bg-zinc-900 text-white">
-          <NavbarBrand as={Link} href="/">
-            <Image
-              src="https://tcg.pokemon.com/assets/img/global/logos/es-mx/tcg-logo.png"
-              alt="El Juego de Cartas Coleccionables Pokémon"
-              className="h-10"
-            />
-          </NavbarBrand>
-          <NavbarToggle />
-          <NavbarCollapse>
-            <NavbarLink
-              as={Link}
-              href="/"
-              aria-current={location.pathname === '/' ? 'page' : undefined}
-              active={location.pathname === '/'}
-            >
-              PokeCartas
-            </NavbarLink>
-            <NavButton
-              onClick={handleLogout}
-              role="button"
-              className="text-red-700 md:hover:text-red-500"
-            >
-              Cerrar sesión
-            </NavButton>
-          </NavbarCollapse>
+          <div className="container mx-auto px-4 flex justify-between">
+            <NavbarBrand as={Link} href="/">
+              <Image
+                src="https://tcg.pokemon.com/assets/img/global/logos/es-mx/tcg-logo.png"
+                alt="El Juego de Cartas Coleccionables Pokémon"
+                className="h-10"
+              />
+            </NavbarBrand>
+            <NavbarToggle />
+            <NavbarCollapse>
+              <NavbarLink
+                as={Link}
+                href="/"
+                aria-current={location.pathname === '/' ? 'page' : undefined}
+                active={location.pathname === '/'}
+              >
+                PokeCartas
+              </NavbarLink>
+              <NavButton
+                onClick={handleLogout}
+                role="button"
+                className="text-red-700 md:hover:text-red-500"
+              >
+                Cerrar sesión
+              </NavButton>
+            </NavbarCollapse>
+          </div>
         </Navbar>
       </header>
 
-      <main id="main-content" className="flex-1 overflow-y-auto">
+      <main
+        id="main-content"
+        className="flex-1 overflow-y-auto container mx-auto px-4"
+      >
         <Outlet />
       </main>
     </div>
