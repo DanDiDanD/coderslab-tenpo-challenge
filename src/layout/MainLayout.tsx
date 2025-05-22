@@ -9,6 +9,7 @@ import {
 
 import { Image } from '../components';
 import { clearTokens } from '../utils/auth';
+import { NavButton } from '../components/NavButton';
 
 export const MainLayout = () => {
   const location = useLocation();
@@ -29,16 +30,13 @@ export const MainLayout = () => {
       </a>
 
       <header>
-        <Navbar fluid rounded className="shadow-sm">
+        <Navbar fluid className="shadow-sm bg-zinc-900 text-white">
           <NavbarBrand as={Link} href="/">
             <Image
               src="https://tcg.pokemon.com/assets/img/global/logos/es-mx/tcg-logo.png"
               alt="El Juego de Cartas Coleccionables Pokémon"
-              className="mr-3 h-6 sm:h-9"
+              className="h-10"
             />
-            <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-              Pokémon App
-            </span>
           </NavbarBrand>
           <NavbarToggle />
           <NavbarCollapse>
@@ -50,15 +48,13 @@ export const MainLayout = () => {
             >
               PokeCartas
             </NavbarLink>
-            <NavbarLink
-              as="button"
-              role="button"
+            <NavButton
               onClick={handleLogout}
-              color="red"
-              className="text-red-600 hover:underline font-medium"
+              role="button"
+              className="text-red-700 md:hover:text-red-500"
             >
               Cerrar sesión
-            </NavbarLink>
+            </NavButton>
           </NavbarCollapse>
         </Navbar>
       </header>

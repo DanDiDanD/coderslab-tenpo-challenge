@@ -1,7 +1,7 @@
 import { Button as FlowbiteButton, Spinner } from 'flowbite-react';
 import type { ButtonProps as FlowbiteButtonProps } from 'flowbite-react';
 
-type ButtonProps = FlowbiteButtonProps & {
+export type ButtonProps = FlowbiteButtonProps & {
   isLoading?: boolean;
   loadingText?: string;
 };
