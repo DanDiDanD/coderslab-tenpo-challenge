@@ -1,3 +1,5 @@
+import 'react-intersection-observer/test-utils';
+
 import { afterAll, afterEach, beforeAll } from 'vitest';
 
 import { server } from './server';
